@@ -1,0 +1,9 @@
+*venv/
+configuration/.env
+.idea
+__pycache__/
+/data/
+.idea/
+/schoole_system/authentication/static/
+/static/
+
