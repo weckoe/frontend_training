@@ -4,6 +4,7 @@ from django.shortcuts import get_object_or_404
 from rest_framework.pagination import LimitOffsetPagination
 from rest_framework.response import Response
 from rest_framework.views import APIView
+from rest_framework.permissions import IsAuthenticated
 
 from schoole_system.authentication.models import User
 from schoole_system.authentication.serializers import (
@@ -26,7 +27,6 @@ class UserListCreate(APIView, LimitOffsetPagination):
         if serializer.is_valid(raise_exception=True):
             serializer.save()
             return Response(serializer.validated_data)
-
 
 class UserSingleUpdateDelete(APIView):
     queryset = User.objects.all()

@@ -11,15 +11,13 @@ import axios from "axios";
 const SignIn = function () {
 
     const instance = axios.create({
-        baseURL: 'http://localhost:1337/',
+        baseURL: 'http://localhost:1337',
         timeout: 1000,
-        headers: {"Access-Control-Allow-Origin": "*"}
     });
-
 
     const {handleSubmit, register} = useForm();
     const onSubmit = (data) => {
-        instance.post('/users', {data})
+        instance.post('/users/', data)
             .then(function (response) {
                 console.log(response);
             })
@@ -68,21 +66,15 @@ const SignIn = function () {
                     margin="normal"
                     required
                     fullWidth
-                    name="password1"
                     label="Password"
-                    type="password"
-                    id="password1"
-                    {...register("password1")}
+                    {...register("password")}
                 />
 
                 <TextField
                     margin="normal"
                     required
                     fullWidth
-                    name="password1"
                     label="Password2"
-                    type="password"
-                    id="password2"
                     {...register("password2")}
                 />
 

@@ -4,6 +4,7 @@ from django.shortcuts import get_object_or_404
 from rest_framework.pagination import LimitOffsetPagination
 from rest_framework.response import Response
 from rest_framework.views import APIView
+from rest_framework.permissions import IsAuthenticated
 
 from schoole_system.api.models import Assignment, Choice, Question
 from schoole_system.api.serializers import (
@@ -19,8 +20,10 @@ from schoole_system.api.serializers import (
 )
 
 
+
 class AssignmentList(APIView, LimitOffsetPagination):
     queryset = Assignment.objects.all()
+    permission_classes = (IsAuthenticated,)
 
     def get(self, request):
         results = self.paginate_queryset(self.queryset, request)
@@ -35,6 +38,7 @@ class AssignmentList(APIView, LimitOffsetPagination):
 
 
 class AssignmentSingleUpdateDelete(APIView):
+    permission_classes = (IsAuthenticated,)
 
     def get(self, request, pk):
         assignment = get_object_or_404(Assignment, id=pk)
@@ -60,6 +64,7 @@ class AssignmentSingleUpdateDelete(APIView):
 
 class ChoiceList(APIView, LimitOffsetPagination):
     queryset = Choice.objects.all()
+    permission_classes = (IsAuthenticated,)
 
     def get(self, request):
         results = self.paginate_queryset(self.queryset, request)
@@ -74,6 +79,8 @@ class ChoiceList(APIView, LimitOffsetPagination):
 
 
 class ChoiceSingleCreateUpdateDelete(APIView):
+    permission_classes = (IsAuthenticated,)
+
     def get(self, request, pk):
         choice = get_object_or_404(Choice, id=pk)
         serializer = ReadChoiceSerializer(choice)
@@ -98,6 +105,7 @@ class ChoiceSingleCreateUpdateDelete(APIView):
 
 class QuestionList(APIView, LimitOffsetPagination):
     queryset = Question.objects.all()
+    permission_classes = (IsAuthenticated,)
 
     def get(self, request):
         results = self.paginate_queryset(self.queryset, request)
@@ -112,6 +120,8 @@ class QuestionList(APIView, LimitOffsetPagination):
 
 
 class QuestionSingleCreateUpdateDelete(APIView):
+    permission_classes = (IsAuthenticated,)
+
     def get(self, request, pk):
         question = get_object_or_404(Question, id=pk)
         serializer = ReadQuestionSerializer(question)
